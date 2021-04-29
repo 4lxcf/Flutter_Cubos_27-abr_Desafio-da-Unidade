@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:filmes_lancamento/movies.dart';
 import 'package:http/http.dart' as http;
 
 class API {
   String _authority = 'api.themoviedb.org';
   String _path = '/3/movie/upcoming';
+
   Map<String, dynamic> _queryParameters = {
     'api_key': 'a5bc05fb630c9b7fdc560033345fa13e',
   };

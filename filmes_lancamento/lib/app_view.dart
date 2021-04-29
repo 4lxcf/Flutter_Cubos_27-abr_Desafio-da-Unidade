@@ -51,7 +51,7 @@ class _AppViewState extends State<AppView> {
                     return CircularProgressIndicator();
                   } else if (snapshot.hasData) {
                     return ListView.builder(
-                      itemCount: snapshot.data.moviesTitle.length,
+                      itemCount: snapshot.data.movieList.length,
                       itemBuilder: (ctx, index) {
                         return Row(
                           children: [
@@ -64,7 +64,7 @@ class _AppViewState extends State<AppView> {
                               ),
                               clipBehavior: Clip.hardEdge,
                               child: Image.network(
-                                'https://image.tmdb.org/t/p/w300${snapshot.data.moviesPosterPath[index]}',
+                                'https://image.tmdb.org/t/p/w300${snapshot.data.movieList[index].posterPath}',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -74,15 +74,27 @@ class _AppViewState extends State<AppView> {
                               children: [
                                 Container(
                                   height: 20,
-                                  width: 200,
+                                  width: 220,
                                   margin: EdgeInsets.only(bottom: 5.0),
                                   child: Text(
-                                    '${snapshot.data.moviesTitle[index]}',
+                                    '${snapshot.data.movieList[index].originalTitle} ',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.7,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: EdgeInsets.only(bottom: 5.0),
+                                  child: Text(
+                                    '( ${snapshot.data.movieList[index].title} )',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontStyle: FontStyle.italic,
                                     ),
                                   ),
                                 ),
@@ -91,7 +103,7 @@ class _AppViewState extends State<AppView> {
                                   width: 225,
                                   margin: EdgeInsets.only(bottom: 10.0),
                                   child: Text(
-                                    '${snapshot.data.moviesOverview[index]}',
+                                    '${snapshot.data.movieList[index].overview}',
                                     textAlign: TextAlign.justify,
                                     softWrap: true,
                                     style: TextStyle(
@@ -102,27 +114,43 @@ class _AppViewState extends State<AppView> {
                                   ),
                                 ),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.calendar_today_rounded,
-                                      size: 18,
+                                      size: 16,
                                     ),
+                                    // Container(
+                                    //   margin: EdgeInsets.only(left: 8.0),
+                                    //   child: Text(
+                                    //     'Release Date:',
+                                    //     style: TextStyle(
+                                    //       color: Colors.black,
+                                    //       fontSize: 14,
+                                    //       fontWeight: FontWeight.bold,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Container(
                                       margin: EdgeInsets.only(left: 8.0),
-                                      child: Text(snapshot
-                                          .data.moviesReleaseDate[index]
-                                          .split('-')
-                                          .reversed
-                                          .reduce((value, element) =>
-                                              value + '-' + element)
-                                          .toString()),
+                                      child: Text(
+                                        snapshot
+                                            .data.movieList[index].releaseDate
+                                            .split('-')
+                                            .reversed
+                                            .reduce((value, element) =>
+                                                value + '-' + element)
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontStyle: FontStyle.italic),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Container(
                                   height: 55,
                                   width: 225,
-                                  margin: EdgeInsets.only(top: 10.0),
+                                  margin: EdgeInsets.only(top: 15.0),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: 3,

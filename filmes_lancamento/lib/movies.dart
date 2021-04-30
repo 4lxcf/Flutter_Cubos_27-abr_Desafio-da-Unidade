@@ -20,6 +20,8 @@ class Movie {
   String posterPath;
   String releaseDate;
   String title;
+  double popularity;
+  double voteAverage;
 
   Movie.fromJson(Map<String, dynamic> json) {
     originalTitle = json['original_title'];
@@ -27,5 +29,7 @@ class Movie {
     posterPath = json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];
+    popularity = json['popularity'];
+    voteAverage = json['vote_average'].toDouble();
   }
 }

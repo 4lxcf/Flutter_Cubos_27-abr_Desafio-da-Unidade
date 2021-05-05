@@ -7,7 +7,7 @@ class API {
   String _path = '/3/movie/upcoming';
 
   Map<String, dynamic> _queryParameters = {
-    'api_key': '',
+    'api_key': 'a5bc05fb630c9b7fdc560033345fa13e',
   };
 
   Future<Movies> fetchMovies() async {
@@ -20,8 +20,7 @@ class API {
     if (response.statusCode == 200) {
       return Movies.fromJson(jsonDecode(response.body));
     } else {
-      return null;
+      return Future.error(response.statusCode);
     }
   }
 }
-//a5bc05fb630c9b7fdc560033345fa13e

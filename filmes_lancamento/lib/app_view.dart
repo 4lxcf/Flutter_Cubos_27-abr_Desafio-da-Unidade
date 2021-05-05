@@ -1,5 +1,4 @@
 import 'package:filmes_lancamento/app_controller.dart';
-import 'package:filmes_lancamento/http_exceptions.dart';
 import 'package:filmes_lancamento/movies.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +11,7 @@ class AppView extends StatefulWidget {
 
 class _AppViewState extends State<AppView> {
   final controller = AppController();
+  int indexPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +49,25 @@ class _AppViewState extends State<AppView> {
                         ),
                       ),
                       onPressed: controller.loadMovies(),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.chevron_left_rounded,
+                            size: 14,
+                          ),
+                          onPressed: () {},
+                        ),
+                        Text('$indexPage'),
+                        IconButton(
+                          icon: Icon(
+                            Icons.chevron_right_rounded,
+                            size: 14,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
                     ),
                     // IconButton(
                     //   icon: Icon(Icons.filter_alt_rounded),
@@ -255,8 +274,12 @@ class _AppViewState extends State<AppView> {
                     } else {
                       return Container(
                         child: Text(
-                          'Unexpected error. Please, try again few minutes later.',
+                          'ERROR ${snapshot.error}. Your API Key isn\'t working.',
                           textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
                         ),
                       );
                     }

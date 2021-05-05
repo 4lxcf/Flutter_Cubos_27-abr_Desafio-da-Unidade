@@ -6,7 +6,7 @@ class AppController {
 
   Future<Movies> get movies => model.movies;
 
-  loadMovies() {
-    model.fetchMovies();
+  loadMovies(int page) {
+    model.fetchMovies(page);
   }
 }

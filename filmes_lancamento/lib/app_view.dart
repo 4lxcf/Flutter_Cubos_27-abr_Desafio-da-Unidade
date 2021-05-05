@@ -48,7 +48,11 @@ class _AppViewState extends State<AppView> {
                           letterSpacing: 1.0,
                         ),
                       ),
-                      onPressed: controller.loadMovies(),
+                      onPressed: () {
+                        setState(() {
+                          controller.loadMovies();
+                        });
+                      },
                     ),
                     Row(
                       children: [

@@ -12,6 +12,13 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final controller = AppController();
   int indexPage = 1;
+  int totalPage;
+
+  @override
+  void initState() {
+    super.initState();
+    controller.loadMovies(indexPage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,42 +43,66 @@ class _AppViewState extends State<AppView> {
                   horizontal: 15.0,
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton(
-                      child: Text(
-                        'Coming Soon',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.0,
+                    Container(
+                      margin: EdgeInsets.only(right: 10.0),
+                      child: TextButton(
+                        child: Text(
+                          'Coming Soon',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0,
+                          ),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            controller.loadMovies(indexPage);
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          controller.loadMovies();
-                        });
-                      },
                     ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.chevron_left_rounded,
-                            size: 14,
-                          ),
-                          onPressed: () {},
-                        ),
-                        Text('$indexPage'),
-                        IconButton(
-                          icon: Icon(
-                            Icons.chevron_right_rounded,
-                            size: 14,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: 10.0,
+                        right: 10.0,
+                      ),
+                      child: Row(
+                        children: [
+                          indexPage > 1
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.chevron_left_rounded,
+                                    size: 14,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      indexPage--;
+                                      controller.loadMovies(indexPage);
+                                    });
+                                  },
+                                )
+                              : Container(),
+                          Text('$indexPage'),
+                          indexPage < totalPage
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.chevron_right_rounded,
+                                    size: 14,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      indexPage++;
+                                      controller.loadMovies(indexPage);
+                                    });
+                                  },
+                                )
+                              : Container(width: 20),
+                        ],
+                      ),
                     ),
                     // IconButton(
                     //   icon: Icon(Icons.filter_alt_rounded),
@@ -95,6 +126,9 @@ class _AppViewState extends State<AppView> {
                       return ListView.builder(
                         itemCount: snapshot.data.movieList.length,
                         itemBuilder: (ctx, index) {
+                          snapshot.data.totalPages != null
+                              ? totalPage = snapshot.data.totalPages
+                              : '';
                           return Row(
                             children: [
                               Container(

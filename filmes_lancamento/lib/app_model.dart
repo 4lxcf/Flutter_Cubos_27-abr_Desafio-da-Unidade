@@ -6,7 +6,13 @@ class AppModel {
 
   Future<Movies> get movies => _movies;
 
-  fetchMovies() {
-    _movies = API().fetchMovies();
+  Map<String, dynamic> _queryParameters = {
+    'api_key': 'a5bc05fb630c9b7fdc560033345fa13e',
+    'page': '',
+  };
+
+  fetchMovies(int page) {
+    _queryParameters['page'] = '$page';
+    _movies = API(_queryParameters).fetchMovies();
   }
 }

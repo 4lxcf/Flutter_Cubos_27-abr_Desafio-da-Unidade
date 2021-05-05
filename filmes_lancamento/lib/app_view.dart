@@ -1,4 +1,5 @@
 import 'package:filmes_lancamento/app_controller.dart';
+import 'package:filmes_lancamento/http_exceptions.dart';
 import 'package:filmes_lancamento/movies.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class _AppViewState extends State<AppView> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.13,
+              height: MediaQuery.of(context).size.height * 0.17,
               width: double.infinity,
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
@@ -49,10 +50,10 @@ class _AppViewState extends State<AppView> {
                       ),
                       onPressed: controller.loadMovies(),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.filter_alt_rounded),
-                      onPressed: () {},
-                    ),
+                    // IconButton(
+                    //   icon: Icon(Icons.filter_alt_rounded),
+                    //   onPressed: () {},
+                    // ),
                   ],
                 ),
               ),
@@ -169,10 +170,7 @@ class _AppViewState extends State<AppView> {
                                                     .reduce((value, element) =>
                                                         value + '-' + element)
                                                     .toString(),
-                                                style: TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  fontSize: 14,
-                                                ),
+                                                style: TextStyle(fontSize: 14),
                                               ),
                                             ),
                                           ],
@@ -255,7 +253,12 @@ class _AppViewState extends State<AppView> {
                         },
                       );
                     } else {
-                      return Container();
+                      return Container(
+                        child: Text(
+                          'Unexpected error. Please, try again few minutes later.',
+                          textAlign: TextAlign.center,
+                        ),
+                      );
                     }
                   },
                 ),

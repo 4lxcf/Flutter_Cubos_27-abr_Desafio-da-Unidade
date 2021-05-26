@@ -12,7 +12,7 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final controller = AppController();
   int indexPage = 1;
-  int totalPage;
+  int totalPage = 20;
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _AppViewState extends State<AppView> {
                                 )
                               : Container(),
                           Text('$indexPage'),
-                          indexPage < totalPage
+                          (indexPage < totalPage)
                               ? IconButton(
                                   icon: Icon(
                                     Icons.chevron_right_rounded,
@@ -104,10 +104,6 @@ class _AppViewState extends State<AppView> {
                         ],
                       ),
                     ),
-                    // IconButton(
-                    //   icon: Icon(Icons.filter_alt_rounded),
-                    //   onPressed: () {},
-                    // ),
                   ],
                 ),
               ),

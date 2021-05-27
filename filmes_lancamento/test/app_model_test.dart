@@ -15,8 +15,14 @@ void main() {
     });
   });
 }
+//api: MockAPI()
 
 class MockAPI extends API {
+  Map<String, dynamic> map = {
+    'api_key': 'a5bc05fb630c9b7fdc560033345fa13e',
+    'page': '',
+  };
+
   @override
   Future<Movies> fetchMovies() {
     final movies = Movies([Movie('Filme 1')]);

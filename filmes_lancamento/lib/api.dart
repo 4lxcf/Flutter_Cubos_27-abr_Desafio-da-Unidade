@@ -7,7 +7,7 @@ class API {
   String _path = '/3/movie/upcoming';
   Map<String, dynamic> map;
 
-  API(this.map);
+  API({this.map});
 
   Future<Movies> fetchMovies() async {
     final response = await http.get(Uri.https(

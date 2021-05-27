@@ -12,6 +12,8 @@ class Movies {
       return Movie.fromJson(item);
     }).toList();
   }
+
+  Movies(this.movieList);
 }
 
 class Movie {
@@ -32,4 +34,6 @@ class Movie {
     popularity = json['popularity'];
     voteAverage = json['vote_average'].toDouble();
   }
+
+  Movie(this.title);
 }

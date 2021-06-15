@@ -11,6 +11,8 @@ class Movies {
     movieList = resultList.map((item) {
       return Movie.fromJson(item);
     }).toList();
+
+    movieList.addAll(resultList.map());
   }
 
   Movies(this.movieList);

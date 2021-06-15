@@ -9,7 +9,7 @@ void main() {
       //PREP
       final model = AppModel(api: MockAPI());
       //METHOD
-      model.fetchMovies(1);
+      model.fetchMovies();
       //EXPECTED
       expect(model.movies, completion(isNotNull));
     });

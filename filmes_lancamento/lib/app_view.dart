@@ -10,7 +10,7 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  final controller = AppController();
+  final controller = AppViewModel();
   int indexPage = 1;
   int totalPage = 20;
 
@@ -59,51 +59,52 @@ class _AppViewState extends State<AppView> {
                           ),
                         ),
                         onPressed: () {
-                          setState(() {
-                            controller.loadMovies(indexPage);
-                          });
+                          //setState(() {
+                          indexPage++;
+                          controller.loadMovies(indexPage);
+                          //});
                         },
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: 10.0,
-                        right: 10.0,
-                      ),
-                      child: Row(
-                        children: [
-                          indexPage > 1
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.chevron_left_rounded,
-                                    size: 14,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      indexPage--;
-                                      controller.loadMovies(indexPage);
-                                    });
-                                  },
-                                )
-                              : Container(),
-                          Text('$indexPage'),
-                          (indexPage < totalPage)
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.chevron_right_rounded,
-                                    size: 14,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      indexPage++;
-                                      controller.loadMovies(indexPage);
-                                    });
-                                  },
-                                )
-                              : Container(width: 20),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(
+                    //     left: 10.0,
+                    //     right: 10.0,
+                    //   ),
+                    //   child: Row(
+                    //     children: [
+                    //       indexPage > 1
+                    //           ? IconButton(
+                    //               icon: Icon(
+                    //                 Icons.chevron_left_rounded,
+                    //                 size: 14,
+                    //               ),
+                    //               onPressed: () {
+                    //                 setState(() {
+                    //                   indexPage--;
+                    //                   controller.loadMovies(indexPage);
+                    //                 });
+                    //               },
+                    //             )
+                    //           : Container(),
+                    //       Text('$indexPage'),
+                    //       (indexPage < totalPage)
+                    //           ? IconButton(
+                    //               icon: Icon(
+                    //                 Icons.chevron_right_rounded,
+                    //                 size: 14,
+                    //               ),
+                    //               onPressed: () {
+                    //                 setState(() {
+                    //                   indexPage++;
+                    //                   controller.loadMovies(indexPage);
+                    //                 });
+                    //               },
+                    //             )
+                    //           : Container(width: 20),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -113,18 +114,15 @@ class _AppViewState extends State<AppView> {
                 color: Colors.blue[50],
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: FutureBuilder<Movies>(
-                  future: controller.movies,
+                child: StreamBuilder<Movies>(
+                  stream: controller.streamController.stream,
                   builder: (_, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
+                    if (snapshot.connectionState != ConnectionState.active) {
                       return CircularProgressIndicator();
                     } else if (snapshot.hasData) {
                       return ListView.builder(
                         itemCount: snapshot.data.movieList.length,
                         itemBuilder: (ctx, index) {
-                          snapshot.data.totalPages != null
-                              ? totalPage = snapshot.data.totalPages
-                              : '';
                           return Row(
                             children: [
                               Container(

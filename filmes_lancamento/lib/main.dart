@@ -1,4 +1,4 @@
-import 'package:filmes_lancamento/app_view.dart';
+import 'package:filmes_lancamento/CommonViews/app_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:filmes_lancamento/api.dart';
-import 'package:filmes_lancamento/app_model.dart';
+import 'package:filmes_lancamento/Network/api.dart';
+import 'package:filmes_lancamento/Models/app_model.dart';
 import 'package:filmes_lancamento/movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ void main() {
       //PREP
       final model = AppModel(api: MockAPI());
       //METHOD
-      model.fetchMovies();
+      model.fetchMovies(1);
       //EXPECTED
       expect(model.movies, completion(isNotNull));
     });

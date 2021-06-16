@@ -8,10 +8,6 @@ class Movies {
     totalPages = json['total_pages'];
     var resultList = json['results'] as List;
 
-    // movieList = resultList.map((item) {
-    //   return Movie.fromJson(item);
-    // }).toList();
-
     movieList.addAll(resultList.map((item) => Movie.fromJson(item)).toList());
   }
 

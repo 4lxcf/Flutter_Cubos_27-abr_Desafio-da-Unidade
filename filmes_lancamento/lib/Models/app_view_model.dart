@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:filmes_lancamento/api.dart';
-import 'package:filmes_lancamento/app_model.dart';
+import 'package:filmes_lancamento/Network/api.dart';
+import 'package:filmes_lancamento/Models/app_model.dart';
 import 'package:filmes_lancamento/movies.dart';
 
 class AppViewModel {

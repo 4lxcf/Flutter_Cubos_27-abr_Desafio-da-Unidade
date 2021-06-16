@@ -1,4 +1,4 @@
-import 'package:filmes_lancamento/api.dart';
+import 'package:filmes_lancamento/Network/api.dart';
 import 'package:filmes_lancamento/movies.dart';
 
 class AppModel {

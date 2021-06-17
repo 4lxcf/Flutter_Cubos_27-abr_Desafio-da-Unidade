@@ -1,3 +1,4 @@
+import 'package:filmes_lancamento/Utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class FilmWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class FilmWidget extends StatelessWidget {
   final String filmVoteAverage;
   final double filmPopularity;
 
-  FilmWidget(
+  FilmWidget({
     this.filmOriginalTitle,
     this.filmOverview,
     this.filmPopularity,
@@ -17,7 +18,7 @@ class FilmWidget extends StatelessWidget {
     this.filmReleaseDate,
     this.filmTitle,
     this.filmVoteAverage,
-  );
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +44,24 @@ class FilmWidget extends StatelessWidget {
             ],
           ),
           clipBehavior: Clip.hardEdge,
-          child: Image.network(
-            filmPoster,
-            fit: BoxFit.fill,
+          child: InkWell(
+            onTap: () => Navigator.pushNamed(
+              context,
+              Routes.FILMDETAILS_VIEW,
+              arguments: FilmWidget(
+                filmOriginalTitle: filmOriginalTitle,
+                filmOverview: filmOverview,
+                filmPopularity: filmPopularity,
+                filmPoster: filmPoster,
+                filmReleaseDate: filmReleaseDate,
+                filmTitle: filmTitle,
+                filmVoteAverage: filmVoteAverage,
+              ),
+            ),
+            child: Image.network(
+              filmPoster,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         Column(
@@ -75,20 +91,6 @@ class FilmWidget extends StatelessWidget {
                   color: Colors.black54,
                   fontSize: 14,
                   fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
-            Container(
-              height: 70,
-              width: 225,
-              margin: EdgeInsets.only(bottom: 15.0),
-              child: Text(
-                filmOverview,
-                textAlign: TextAlign.justify,
-                softWrap: true,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 11,
                 ),
               ),
             ),

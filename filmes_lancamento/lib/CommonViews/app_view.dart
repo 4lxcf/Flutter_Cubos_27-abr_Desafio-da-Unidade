@@ -79,19 +79,25 @@ class _AppViewState extends State<AppView> {
                             controller.loadMovies(indexPage);
                           }
                           return FilmWidget(
-                              '${snapshot.data.movieList[index].originalTitle} ',
-                              '${snapshot.data.movieList[index].overview}',
-                              snapshot.data.movieList[index].popularity,
-                              'https://image.tmdb.org/t/p/w300${snapshot.data.movieList[index].posterPath}',
-                              snapshot.data.movieList[index].releaseDate
+                              filmOriginalTitle:
+                                  '${snapshot.data.movieList[index].originalTitle} ',
+                              filmOverview:
+                                  '${snapshot.data.movieList[index].overview}',
+                              filmPopularity:
+                                  snapshot.data.movieList[index].popularity,
+                              filmPoster:
+                                  'https://image.tmdb.org/t/p/w300${snapshot.data.movieList[index].posterPath}',
+                              filmReleaseDate: snapshot
+                                  .data.movieList[index].releaseDate
                                   .split('-')
                                   .reversed
                                   .reduce(
                                       (value, element) => value + '-' + element)
                                   .toString(),
-                              '( ${snapshot.data.movieList[index].title} )',
-                              '${snapshot.data.movieList[index].voteAverage}');
-                          //
+                              filmTitle:
+                                  '( ${snapshot.data.movieList[index].title} )',
+                              filmVoteAverage:
+                                  '${snapshot.data.movieList[index].voteAverage}');
                         },
                       );
                     } else {

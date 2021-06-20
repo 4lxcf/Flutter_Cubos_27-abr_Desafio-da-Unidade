@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class FilmWidget extends StatelessWidget {
   final String filmPoster;
+  final String filmBackdrop;
   final String filmOriginalTitle;
   final String filmTitle;
   final String filmOverview;
@@ -15,6 +16,7 @@ class FilmWidget extends StatelessWidget {
     this.filmOverview,
     this.filmPopularity,
     this.filmPoster,
+    this.filmBackdrop,
     this.filmReleaseDate,
     this.filmTitle,
     this.filmVoteAverage,
@@ -53,6 +55,7 @@ class FilmWidget extends StatelessWidget {
                 filmOverview: filmOverview,
                 filmPopularity: filmPopularity,
                 filmPoster: filmPoster,
+                filmBackdrop: filmBackdrop,
                 filmReleaseDate: filmReleaseDate,
                 filmTitle: filmTitle,
                 filmVoteAverage: filmVoteAverage,

@@ -18,6 +18,7 @@ class Movie {
   String originalTitle;
   String overview;
   String posterPath;
+  String backdropPath;
   String releaseDate;
   String title;
   double popularity;
@@ -27,6 +28,7 @@ class Movie {
     originalTitle = json['original_title'];
     overview = json['overview'];
     posterPath = json['poster_path'];
+    backdropPath = json['backdrop_path'];
     releaseDate = json['release_date'];
     title = json['title'];
     popularity = json['popularity'];

@@ -87,6 +87,8 @@ class _AppViewState extends State<AppView> {
                                   snapshot.data.movieList[index].popularity,
                               filmPoster:
                                   'https://image.tmdb.org/t/p/w300${snapshot.data.movieList[index].posterPath}',
+                              filmBackdrop:
+                                  'https://image.tmdb.org/t/p/w300${snapshot.data.movieList[index].backdropPath}',
                               filmReleaseDate: snapshot
                                   .data.movieList[index].releaseDate
                                   .split('-')

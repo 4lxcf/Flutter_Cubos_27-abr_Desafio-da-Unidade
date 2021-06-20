@@ -12,22 +12,50 @@ class _FilmDetailsViewState extends State<FilmDetailsView> {
     final film = ModalRoute.of(context).settings.arguments as FilmWidget;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(film.filmTitle),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.bookmark_border),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: double.infinity,
-              child: Image.network(film.filmPoster),
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(film.filmBackdrop),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white30.withOpacity(1),
+                      Colors.white30.withOpacity(0.2),
+                      Colors.transparent,
+                    ],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+              ),
             ),
             Text(
               film.filmOriginalTitle,
               style: TextStyle(
-                fontSize: 40,
+                fontSize: 21,
                 fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
               textAlign: TextAlign.center,
             ),
@@ -39,7 +67,8 @@ class _FilmDetailsViewState extends State<FilmDetailsView> {
               child: Text(
                 film.filmOverview,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
+                  color: Colors.black54,
                 ),
                 textAlign: TextAlign.justify,
               ),

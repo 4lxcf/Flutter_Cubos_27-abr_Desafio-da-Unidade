@@ -1,3 +1,4 @@
+import 'package:filmes_lancamento/Models/app_view_model.dart';
 import 'package:filmes_lancamento/Widgets/film_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +8,14 @@ class FilmDetailsView extends StatefulWidget {
 }
 
 class _FilmDetailsViewState extends State<FilmDetailsView> {
+  final controller = AppViewModel();
+  bool isFav = false;
+
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context).settings.arguments as FilmWidget;
+    var doubleVoteAverage = double.parse(film.filmVoteAverage);
+    assert(doubleVoteAverage is double);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -18,8 +24,16 @@ class _FilmDetailsViewState extends State<FilmDetailsView> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmark_border),
-            onPressed: () {},
+            iconSize: 30,
+            icon: isFav ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
+            onPressed: () {
+              setState(() {
+                isFav
+                    ? controller.removeFavoriteMovie(film.filmId)
+                    : controller.addFavoriteMovie(film.filmId);
+                isFav = !isFav;
+              });
+            },
           ),
         ],
       ),
@@ -50,24 +64,94 @@ class _FilmDetailsViewState extends State<FilmDetailsView> {
                 ),
               ),
             ),
-            Text(
-              film.filmOriginalTitle,
-              style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 5.0,
+                vertical: 1.0,
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                film.filmOriginalTitle,
+                style: TextStyle(
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 1.0,
+              ),
+              child: Row(
+                children: [
+                  ...List.generate(
+                    5,
+                    (index) => Icon(
+                      Icons.star,
+                      size: 16,
+                      color: (index < (doubleVoteAverage / 2).floor())
+                          ? Colors.yellowAccent
+                          : Colors.black,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                    ),
+                    child: Text(
+                      film.filmVoteAverage,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 4.0,
+              ),
+              child: Text(
+                'Release Date: ${film.filmReleaseDate}',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                left: 10.0,
+                top: 40.0,
+                bottom: 10.0,
+              ),
+              child: Text(
+                'OVERVIEW',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 10.0,
+                horizontal: 8.0,
               ),
               child: Text(
                 film.filmOverview,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 14,
                   color: Colors.black54,
                 ),
                 textAlign: TextAlign.justify,

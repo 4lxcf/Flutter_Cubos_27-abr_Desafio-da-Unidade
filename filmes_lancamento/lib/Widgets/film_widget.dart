@@ -10,6 +10,7 @@ class FilmWidget extends StatelessWidget {
   final String filmReleaseDate;
   final String filmVoteAverage;
   final double filmPopularity;
+  final int filmId;
 
   FilmWidget({
     this.filmOriginalTitle,
@@ -20,6 +21,7 @@ class FilmWidget extends StatelessWidget {
     this.filmReleaseDate,
     this.filmTitle,
     this.filmVoteAverage,
+    this.filmId,
   });
 
   @override
@@ -59,6 +61,7 @@ class FilmWidget extends StatelessWidget {
                 filmReleaseDate: filmReleaseDate,
                 filmTitle: filmTitle,
                 filmVoteAverage: filmVoteAverage,
+                filmId: filmId,
               ),
             ),
             child: Image.network(
@@ -103,90 +106,90 @@ class FilmWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.calendar_today_rounded,
-                        size: 16,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 5),
-                        child: Text(
-                          filmReleaseDate
-                              .split('-')
-                              .reversed
-                              .reduce((value, element) => value + '-' + element)
-                              .toString(),
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 60,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[100],
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Vote Average',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          filmVoteAverage,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 60,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      color: Colors.blue[100],
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Fame Rating',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          '${(filmPopularity / 1000).toStringAsFixed(1)}K',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     Icon(
+                  //       Icons.calendar_today_rounded,
+                  //       size: 16,
+                  //     ),
+                  //     Container(
+                  //       margin: EdgeInsets.only(left: 5),
+                  //       child: Text(
+                  //         filmReleaseDate
+                  //             .split('-')
+                  //             .reversed
+                  //             .reduce((value, element) => value + '-' + element)
+                  //             .toString(),
+                  //         style: TextStyle(fontSize: 14),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Container(
+                  //   height: 60,
+                  //   width: 45,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.blue[100],
+                  //     border: Border.all(
+                  //       color: Colors.black,
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(8.0),
+                  //   ),
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //     children: [
+                  //       Text(
+                  //         'Vote Average',
+                  //         style: TextStyle(
+                  //           fontSize: 10,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //       Text(
+                  //         filmVoteAverage,
+                  //         style: TextStyle(
+                  //           fontSize: 18,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: 60,
+                  //   width: 45,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.blue[100],
+                  //     border: Border.all(
+                  //       color: Colors.black,
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(8.0),
+                  //   ),
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //     children: [
+                  //       Text(
+                  //         'Fame Rating',
+                  //         style: TextStyle(
+                  //           fontSize: 10,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //       Text(
+                  //         '${(filmPopularity / 1000).toStringAsFixed(1)}K',
+                  //         style: TextStyle(
+                  //           fontSize: 18,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -23,6 +23,7 @@ class Movie {
   String title;
   double popularity;
   double voteAverage;
+  int id;
 
   Movie.fromJson(Map<String, dynamic> json) {
     originalTitle = json['original_title'];
@@ -33,6 +34,7 @@ class Movie {
     title = json['title'];
     popularity = json['popularity'];
     voteAverage = json['vote_average'].toDouble();
+    id = json['id'];
   }
 
   Movie(this.title);

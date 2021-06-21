@@ -13,11 +13,12 @@ class AppViewModel {
       },
     ),
   );
-  Future<bool> get isFavorite => _model.isFavorite();
+
   Future<Movies> get movies => _model.movies;
   int get id => _model.id;
 
   StreamController<Movies> streamController = StreamController();
+  StreamController<bool> streamControllerFav = StreamController();
 
   loadMovies(int page) {
     _model.fetchMovies(page);
@@ -32,5 +33,10 @@ class AppViewModel {
   void removeFavoriteMovie(int id) {
     _model.id = id;
     _model.removeFavoriteMovie();
+  }
+
+  isFavorite(int id) async {
+    _model.id = id;
+    _model.isFavorite().then((value) => streamControllerFav.add(value));
   }
 }

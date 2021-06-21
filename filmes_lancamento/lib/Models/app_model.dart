@@ -36,7 +36,7 @@ class AppModel {
     internalStorage.removeFavoriteMovie(id);
   }
 
-  Future<bool> isFavorite() {
+  Future<bool> isFavorite() async {
     return internalStorage.isFavorite(id);
   }
 }

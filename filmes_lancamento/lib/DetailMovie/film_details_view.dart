@@ -9,13 +9,13 @@ class FilmDetailsView extends StatefulWidget {
 
 class _FilmDetailsViewState extends State<FilmDetailsView> {
   final controller = AppViewModel();
-  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
     final film = ModalRoute.of(context).settings.arguments as FilmWidget;
     var doubleVoteAverage = double.parse(film.filmVoteAverage);
     assert(doubleVoteAverage is double);
+    controller.isFavorite(film.filmId);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -23,16 +23,30 @@ class _FilmDetailsViewState extends State<FilmDetailsView> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          IconButton(
-            iconSize: 30,
-            icon: isFav ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
-            onPressed: () {
-              setState(() {
-                isFav
-                    ? controller.removeFavoriteMovie(film.filmId)
-                    : controller.addFavoriteMovie(film.filmId);
-                isFav = !isFav;
-              });
+          StreamBuilder(
+            stream: controller.streamControllerFav.stream,
+            builder: (_, snapshot) {
+              if (snapshot.hasData) {
+                return IconButton(
+                  iconSize: 30,
+                  icon: snapshot.data
+                      ? Icon(Icons.bookmark)
+                      : Icon(Icons.bookmark_border),
+                  onPressed: () {
+                    setState(() {
+                      snapshot.data
+                          ? controller.removeFavoriteMovie(film.filmId)
+                          : controller.addFavoriteMovie(film.filmId);
+                    });
+                  },
+                );
+              } else {
+                return IconButton(
+                  iconSize: 30,
+                  icon: Icon(Icons.bookmark_border),
+                  onPressed: () {},
+                );
+              }
             },
           ),
         ],
